@@ -40,6 +40,7 @@ function ApiKey() {
       const json = await res.json();
       setRevealed(prev => ({ ...prev, [id]: json.value }));
     } catch (err) {
+      err
       setRevealed(prev => ({ ...prev, [id]: '❌ not in .env' }));
     }
   };

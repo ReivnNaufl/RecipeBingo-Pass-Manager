@@ -21,9 +21,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors(corsOption));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 app.get('/api/key', keyHandler);     
 app.get('/api/reset', resetHandler); 
@@ -43,6 +41,9 @@ const keyToEnv = {
 };
 
 app.get('/api/key/:id', (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).json({ error: 'Missing key ID' });
+  }
   const id = req.params.id;
   const envKey = keyToEnv[id];
   if (!envKey) {
@@ -59,4 +60,13 @@ app.get('/api/key/:id', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+});
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
