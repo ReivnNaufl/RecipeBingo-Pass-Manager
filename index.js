@@ -58,8 +58,8 @@ app.get('/api/key/:id', (req, res) => {
   res.json({ value });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
 
 app.get(/^\/(?!api).*/, (req, res) => {
@@ -69,4 +69,10 @@ app.get(/^\/(?!api).*/, (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION:', err);
+  // Optional: Graceful shutdown
+  // server.close(() => process.exit(1));
 });
