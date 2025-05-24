@@ -9,11 +9,23 @@ function Sidebar() {
 
   const isActive = (path) => location.pathname.includes(path);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setShowConfirm(false);
-    navigate('/login');
-  };
+  const handleLogout = async () => {
+  try {
+    const res = await fetch('/api/logout', {
+      method: 'GET',
+      credentials: 'include', // penting agar cookie session ikut terkirim
+    });
+    if (res.ok) {
+      setShowConfirm(false);
+      navigate('/login');
+    } else {
+      alert('Logout gagal, coba lagi.');
+    }
+  } catch (error) {
+    console.error('Logout error:', error);
+    alert('Logout gagal, coba lagi.');
+  }
+};
 
   return (
     <>

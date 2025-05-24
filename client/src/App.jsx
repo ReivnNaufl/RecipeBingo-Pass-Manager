@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import Overview from "./pages/Overview";
 import ApiKey from "./pages/ApiKey";
 import AccountSettings from "./pages/AccountSetting";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -12,7 +13,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/dashboard" element={<DashboardPage />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="overview" />} /> 
           <Route path="overview" element={<Overview />} />
           <Route path="apikeylist" element={<ApiKey />} />
