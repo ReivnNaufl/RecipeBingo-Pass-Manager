@@ -33,7 +33,13 @@ function Overview() {
     fetchData();
   }, []);
 
-  if (loading) return <div className="p-4 text-center">Loading overview...</div>;
+  if (loading) {
+  return (
+    <div className="flex justify-center items-center h-32">
+      <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500 border-opacity-50"></div>
+    </div>
+  );
+  }
   if (error) return <div className="p-4 text-red-600 text-center">Error: {error}</div>;
 
   return (
@@ -41,12 +47,12 @@ function Overview() {
       <h1 className="text-3xl font-bold mb-6 text-gray-800">📊 Overview</h1>
 
       <div className="mb-4 p-4 bg-green-100 rounded">
-        <h2 className="text-xl font-semibold">Jumlah Akun</h2>
+        <h2 className="text-xl font-semibold">Account Count</h2>
         <p className="text-2xl">{userCount}</p>
       </div>
 
       <div className="p-4 bg-blue-100 rounded">
-        <h2 className="text-xl font-semibold">Jumlah Resep</h2>
+        <h2 className="text-xl font-semibold">Recipe Count</h2>
         <p className="text-2xl">{recipeCount}</p>
       </div>
     </div>
