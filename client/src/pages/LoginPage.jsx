@@ -7,10 +7,11 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [initialLoading, setInitialLoading] = useState(true);
-  const [loginLoading, setLoginLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true); // untuk cek session login saat mount
+  const [loginLoading, setLoginLoading] = useState(false); // untuk tombol login spinner
   const navigate = useNavigate();
 
+  // Cek status login saat komponen mount
   useEffect(() => {
     fetch('/api/isLoggedIn', {
       credentials: 'include',
@@ -90,6 +91,7 @@ function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-green-600 hover:underline focus:outline-none"
                 >
+                  {showPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
             </div>
