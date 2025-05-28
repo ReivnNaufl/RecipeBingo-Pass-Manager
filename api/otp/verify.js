@@ -6,9 +6,9 @@ export default async function handler(req, res) {
   }
 
   const accessKey = req.query.key;
-  
+
   if (accessKey !== process.env.KEY) {
-      return res.status(403).json({ error: 'Invalid Key' });
+    return res.status(403).json({ error: 'Invalid Key' });
   }
 
   const { email, otp } = req.body;
@@ -19,14 +19,17 @@ export default async function handler(req, res) {
 
   try {
     const isValid = await verifyOTP(email, otp);
-    
+
     if (isValid) {
-      return res.status(200).json({ 
-        success: true
+      return res.status(200).json({
+        success: true,
+        message: 'OTP verified successfully'
       });
     }
-    
-    return res.status(400).json({ error: 'Invalid OTP' });
+
+    // You could add more nuanced error handling if desired (e.g., too many attempts, expired)
+    return res.status(401).json({ error: 'Invalid or expired OTP' });
+
   } catch (error) {
     console.error('OTP verification error:', error);
     return res.status(500).json({ error: 'OTP verification failed' });
