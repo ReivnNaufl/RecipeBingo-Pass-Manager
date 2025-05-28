@@ -132,7 +132,7 @@ app.get('/', (req, res) => {
 
 // app.get(/^\/(?!api).*/, (req, res) => {
 //   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-// });
+// }); 
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
