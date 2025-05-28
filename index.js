@@ -13,6 +13,8 @@ import recipeListHandler from './api/recipeList.js';
 import userListHandler from './api/userList.js';
 import session from 'express-session';
 import argon2 from 'argon2';
+import otpRequestHandler from './api/otp/request.js';
+import otpVerifyHandler from './api/otp/verify.js';
 
 
 dotenv.config();
@@ -49,6 +51,8 @@ app.get('/api/reset', resetHandler);
 app.get('/api/keyList', keyListHandler);
 app.get('/api/recipeList', recipeListHandler);
 app.get('/api/userList', userListHandler);
+app.post('/api/otp/request', otpRequestHandler);
+app.post('/api/otp/verify', otpVerifyHandler);
 
 app.post('/api/login', async (req, res) => {
     try {
