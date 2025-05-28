@@ -126,13 +126,13 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile('index.html')
-})
+// app.get('/', (req, res) => {
+//   res.status(200).sendFile('index.html')
+// })
 
-// app.get(/^\/(?!api).*/, (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-// }); 
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+}); 
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
