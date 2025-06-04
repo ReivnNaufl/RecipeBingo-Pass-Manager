@@ -15,7 +15,7 @@ function Hero() {
         <div className="mt-8 flex justify-center gap-4">
           {/* Tombol Unduh */}
           <a
-            href="https://github.com/ReivnNaufl/RecipeBingo/releases/download/v0.1.0/RecipeBingo.apk"
+            href="https://github.com/reivnnaufl/RecipeBingo/releases/latest/download/RecipeBingo.apk"
             className="bg-green-600 text-white px-6 py-3 rounded-full text-lg hover:bg-green-700 transition flex items-center gap-2"
           >
             <img
