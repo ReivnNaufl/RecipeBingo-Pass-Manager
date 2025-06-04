@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       const data = doc.data();
       const quota = data.quota;
 
-      if (quota >= reductionAmount) {
+      if (quota >= reductionAmount && quota > 20) {
         let newQuota = quota - reductionAmount;
         if (reductionAmount == 0.1){
           newQuota = 0
